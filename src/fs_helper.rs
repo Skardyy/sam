@@ -1,9 +1,12 @@
-use mslnk::{MSLinkError, ShellLink};
+use std::fs;
 use std::io::Result;
 use std::path::Path;
 
+#[cfg(windows)]
+use mslnk::{MSLinkError, ShellLink};
+
 #[cfg(target_os = "linux")]
-fn create_desktop_file(source_path: &Path, target_path: &Path) -> std::io::Result<()> {
+fn create_desktop_file(source_path: &Path, target_path: &Path) -> Result<()> {
     let content = format!(
         "[Desktop Entry]\n\
          Type=Application\n\
